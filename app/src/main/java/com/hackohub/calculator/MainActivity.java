@@ -1,20 +1,44 @@
 package com.hackohub.calculator;
 
+import android.app.ActionBar;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
 
+    public static final String NUM1     = "Number 1";
+//    public static final String NUM2     = "Number 2";
+    public static final String OPERATOR = "Operator";
+    public static final String LOGTAG   = "LogTag";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        ActionBar bar = getActionBar();
+//        bar.setBackgroundDrawable(new ColorDrawable(Color.BLUE));//Color.parseColor("#4caf50"))
         setContentView(R.layout.activity_main);
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Log.d(LOGTAG, "Before Num1 value: " + prefs.getLong(NUM1, 0));
+        Log.d(LOGTAG, "Before Oper value: " + prefs.getString(OPERATOR, ""));
+        editor.putLong(NUM1, 0);
+        editor.putString(OPERATOR, "");
+        editor.commit();
+        Log.d(LOGTAG, "After Num1 value: " + prefs.getLong(NUM1, 0));
+        Log.d(LOGTAG, "After Oper value: " + prefs.getString(OPERATOR, ""));
 
         setButtonListners();
     }
@@ -36,11 +60,289 @@ public class MainActivity extends ActionBarActivity {
         Button sign_div   = (Button) findViewById(R.id.sign_div);
         Button sign_equal = (Button) findViewById(R.id.sign_equal);
         Button sign_dot   = (Button) findViewById(R.id.sign_dot);
+        Button sign_rest  = (Button) findViewById(R.id.sign_restart);
+        Button sign_del   = (Button) findViewById(R.id.sign_del);
 
         num_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.getText().append("1");
+                Log.d(LOGTAG,"Clicked 1");
+            }
+        });
+        num_two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.getText().append("2");
+                Log.d(LOGTAG, "Clicked 2");
+            }
+        });
+        num_three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.getText().append("3");
+                Log.d(LOGTAG, "Clicked 3");
+            }
+        });
+        num_four.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.getText().append("4");
+                Log.d(LOGTAG, "Clicked 4");
+            }
+        });
+        num_five.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.getText().append("5");
+                Log.d(LOGTAG, "Clicked 5");
+            }
+        });
+        num_six.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.getText().append("6");
+                Log.d(LOGTAG, "Clicked 6");
+            }
+        });
+        num_seven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.getText().append("7");
+                Log.d(LOGTAG, "Clicked 7");
+            }
+        });
+        num_eight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.getText().append("8");
+                Log.d(LOGTAG, "Clicked 8");
+            }
+        });
+        num_nine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.getText().append("9");
+                Log.d(LOGTAG, "Clicked 9");
+            }
+        });
+        num_zero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.getText().append("0");
+                Log.d(LOGTAG, "Clicked 0");
+            }
+        });
+        sign_dot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.getText().append(".");
+                Log.d(LOGTAG, "Clicked .");
+            }
+        });
+        sign_rest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                editText.setText("");
+                SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putLong(NUM1, 0);
+                editor.putString(OPERATOR, "");
+                editor.commit();
+                Log.d(LOGTAG, "Clicked C");
+            }
+        });
+
+        sign_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                Log.d(LOGTAG,"Clicked +");
+                if(TextUtils.isEmpty(editText.getText().toString())){
+                    Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    Log.d(LOGTAG, "Num1 saving");
+                    if(prefs.getLong(NUM1,0)==0 && prefs.getString(OPERATOR,"").equals("")){
+                        Log.d(LOGTAG, "Num1 & Operator saved");
+                        editor.putLong(NUM1, Long.parseLong(editText.getText().toString()));
+                        editor.putString(OPERATOR, "+");
+                        editor.commit();
+                        editText.setText("");
+                    }
+                    else if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("")) {
+                        Log.d(LOGTAG, "Operator + saved");
+                        editor.putString(OPERATOR, "+");
+                        editor.commit();
+                        editText.setText("");
+                    }
+                    else{
+                        Log.d(LOGTAG, "Num1 already present");
+                        Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+        sign_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                Log.d(LOGTAG,"Clicked -");
+                if(TextUtils.isEmpty(editText.getText().toString())){
+                    Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    Log.d(LOGTAG, "Num1 saving");
+                    if(prefs.getLong(NUM1,0)==0 && prefs.getString(OPERATOR,"").equals("")){
+                        Log.d(LOGTAG, "Num1 & Operator saved");
+                        editor.putLong(NUM1, Long.parseLong(editText.getText().toString()));
+                        editor.putString(OPERATOR, "-");
+                        editor.commit();
+                        editText.setText("");
+                    }
+                    else if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("")) {
+                        Log.d(LOGTAG, "Operator - saved");
+                        editor.putString(OPERATOR, "-");
+                        editor.commit();
+                        editText.setText("");
+                    }
+                    else{
+                        Log.d(LOGTAG, "Num1 already present");
+                        Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+        sign_multi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                Log.d(LOGTAG,"Clicked *");
+                if(TextUtils.isEmpty(editText.getText().toString())){
+                    Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    Log.d(LOGTAG, "Num1 saving");
+                    if(prefs.getLong(NUM1,0)==0 && prefs.getString(OPERATOR,"").equals("")){
+                        Log.d(LOGTAG, "Num1 & Operator saved");
+                        editor.putLong(NUM1, Long.parseLong(editText.getText().toString()));
+                        editor.putString(OPERATOR, "*");
+                        editor.commit();
+                        editText.setText("");
+                    }
+                    else if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("")) {
+                        Log.d(LOGTAG, "Operator * saved");
+                        editor.putString(OPERATOR, "*");
+                        editor.commit();
+                        editText.setText("");
+                    }
+                    else{
+                        Log.d(LOGTAG, "Num1 already present");
+                        Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+        sign_div.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                Log.d(LOGTAG,"Clicked /");
+                if(TextUtils.isEmpty(editText.getText().toString())){
+                    Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    Log.d(LOGTAG, "Num1 saving");
+                    if(prefs.getLong(NUM1,0)==0 && prefs.getString(OPERATOR,"").equals("")){
+                        Log.d(LOGTAG, "Num1 & Operator saved");
+                        editor.putLong(NUM1, Long.parseLong(editText.getText().toString()));
+                        editor.putString(OPERATOR, "/");
+                        editor.commit();
+                        editText.setText("");
+                    }
+                    else if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("")) {
+                        Log.d(LOGTAG, "Operator / saved");
+                        editor.putString(OPERATOR, "/");
+                        editor.commit();
+                        editText.setText("");
+                    }
+                    else{
+                        Log.d(LOGTAG, "Num1 already present");
+                        Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+        sign_equal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) findViewById(R.id.textbox);
+                Log.d(LOGTAG,"Clicked =");
+                if(TextUtils.isEmpty(editText.getText().toString())){
+                    Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    Log.d(LOGTAG, "Getting Result...");
+                    if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("+")){
+                        Long result = prefs.getLong(NUM1,0) + Long.parseLong(editText.getText().toString());
+                        Log.d(LOGTAG,"Result: "+result);
+                        editor.putLong(NUM1, result);
+                        editor.putString(OPERATOR,"");
+                        editor.commit();
+                        editText.setText(result.toString());
+                    }
+                    else if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("-")){
+                        Long result = prefs.getLong(NUM1,0) - Long.parseLong(editText.getText().toString());
+                        Log.d(LOGTAG,"Result: "+result);
+                        editor.putLong(NUM1, result);
+                        editor.putString(OPERATOR,"");
+                        editor.commit();
+                        editText.setText(result.toString());
+                    }
+                    else if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("*")){
+                        Long result = prefs.getLong(NUM1,0) * Long.parseLong(editText.getText().toString());
+                        Log.d(LOGTAG,"Result: "+result);
+                        editor.putLong(NUM1, result);
+                        editor.putString(OPERATOR,"");
+                        editor.commit();
+                        editText.setText(result.toString());
+                    }
+                    else if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("/")){
+                        if(Long.parseLong(editText.getText().toString()) != 0){
+                            Long result = prefs.getLong(NUM1,0) / Long.parseLong(editText.getText().toString());
+                            Log.d(LOGTAG,"Result: "+result);
+                            editor.putLong(NUM1, result);
+                            editor.putString(OPERATOR,"");
+                            editor.commit();
+                            editText.setText(result.toString());
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this,"Second number cannot be 0 in Division",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
             }
         });
     }
