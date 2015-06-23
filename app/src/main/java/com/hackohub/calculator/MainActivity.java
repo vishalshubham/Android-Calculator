@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,16 +20,13 @@ import android.widget.Toast;
 public class MainActivity extends ActionBarActivity {
 
     public static final String NUM1     = "Number 1";
-//    public static final String NUM2     = "Number 2";
+
     public static final String OPERATOR = "Operator";
     public static final String LOGTAG   = "LogTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        ActionBar bar = getActionBar();
-//        bar.setBackgroundDrawable(new ColorDrawable(Color.BLUE));//Color.parseColor("#4caf50"))
         setContentView(R.layout.activity_main);
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -59,7 +57,6 @@ public class MainActivity extends ActionBarActivity {
         Button sign_multi = (Button) findViewById(R.id.sign_multi);
         Button sign_div   = (Button) findViewById(R.id.sign_div);
         Button sign_equal = (Button) findViewById(R.id.sign_equal);
-        Button sign_dot   = (Button) findViewById(R.id.sign_dot);
         Button sign_rest  = (Button) findViewById(R.id.sign_restart);
         Button sign_del   = (Button) findViewById(R.id.sign_del);
 
@@ -143,19 +140,13 @@ public class MainActivity extends ActionBarActivity {
                 Log.d(LOGTAG, "Clicked 0");
             }
         });
-        sign_dot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText editText = (EditText) findViewById(R.id.textbox);
-                editText.getText().append(".");
-                Log.d(LOGTAG, "Clicked .");
-            }
-        });
         sign_rest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText editText = (EditText) findViewById(R.id.textbox);
                 editText.setText("");
+                EditText editText1 = (EditText) findViewById(R.id.whole_cal);
+                editText1.setText("0");
                 SharedPreferences prefs = getPreferences(MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putLong(NUM1, 0);
@@ -171,7 +162,9 @@ public class MainActivity extends ActionBarActivity {
                 EditText editText = (EditText) findViewById(R.id.textbox);
                 Log.d(LOGTAG,"Clicked +");
                 if(TextUtils.isEmpty(editText.getText().toString())){
-                    Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 360);
+                    toast.show();
                 }
                 else{
                     SharedPreferences prefs = getPreferences(MODE_PRIVATE);
@@ -192,7 +185,9 @@ public class MainActivity extends ActionBarActivity {
                     }
                     else{
                         Log.d(LOGTAG, "Num1 already present");
-                        Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG).show();
+                        Toast toast = Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 360);
+                        toast.show();
                     }
                 }
             }
@@ -203,7 +198,9 @@ public class MainActivity extends ActionBarActivity {
                 EditText editText = (EditText) findViewById(R.id.textbox);
                 Log.d(LOGTAG,"Clicked -");
                 if(TextUtils.isEmpty(editText.getText().toString())){
-                    Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 360);
+                    toast.show();
                 }
                 else{
                     SharedPreferences prefs = getPreferences(MODE_PRIVATE);
@@ -224,7 +221,9 @@ public class MainActivity extends ActionBarActivity {
                     }
                     else{
                         Log.d(LOGTAG, "Num1 already present");
-                        Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG).show();
+                        Toast toast = Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 360);
+                        toast.show();
                     }
                 }
             }
@@ -235,7 +234,9 @@ public class MainActivity extends ActionBarActivity {
                 EditText editText = (EditText) findViewById(R.id.textbox);
                 Log.d(LOGTAG,"Clicked *");
                 if(TextUtils.isEmpty(editText.getText().toString())){
-                    Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 360);
+                    toast.show();
                 }
                 else{
                     SharedPreferences prefs = getPreferences(MODE_PRIVATE);
@@ -256,7 +257,9 @@ public class MainActivity extends ActionBarActivity {
                     }
                     else{
                         Log.d(LOGTAG, "Num1 already present");
-                        Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG).show();
+                        Toast toast = Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 360);
+                        toast.show();
                     }
                 }
             }
@@ -267,7 +270,9 @@ public class MainActivity extends ActionBarActivity {
                 EditText editText = (EditText) findViewById(R.id.textbox);
                 Log.d(LOGTAG,"Clicked /");
                 if(TextUtils.isEmpty(editText.getText().toString())){
-                    Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 360);
+                    toast.show();;
                 }
                 else{
                     SharedPreferences prefs = getPreferences(MODE_PRIVATE);
@@ -288,7 +293,9 @@ public class MainActivity extends ActionBarActivity {
                     }
                     else{
                         Log.d(LOGTAG, "Num1 already present");
-                        Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG).show();
+                        Toast toast  = Toast.makeText(MainActivity.this,"You need to click equal first",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 360);
+                        toast.show();
                     }
                 }
             }
@@ -299,13 +306,22 @@ public class MainActivity extends ActionBarActivity {
                 EditText editText = (EditText) findViewById(R.id.textbox);
                 Log.d(LOGTAG,"Clicked =");
                 if(TextUtils.isEmpty(editText.getText().toString())){
-                    Toast.makeText(MainActivity.this,"You need to enter a number first",Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(MainActivity.this, "You need to enter a number first", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 360);
+                    toast.show();
                 }
                 else{
                     SharedPreferences prefs = getPreferences(MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     Log.d(LOGTAG, "Getting Result...");
                     if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("+")){
+                        EditText editText1 = (EditText) findViewById(R.id.whole_cal);
+                        if (editText1.getText().toString().equals("0")) {
+                            editText1.setText(prefs.getLong(NUM1,0) + "+" + Long.parseLong(editText.getText().toString()));
+                        }
+                        else{
+                            editText1.setText("(" + editText1.getText().append(")+" + Long.parseLong(editText.getText().toString())));
+                        }
                         Long result = prefs.getLong(NUM1,0) + Long.parseLong(editText.getText().toString());
                         Log.d(LOGTAG,"Result: "+result);
                         editor.putLong(NUM1, result);
@@ -314,6 +330,13 @@ public class MainActivity extends ActionBarActivity {
                         editText.setText(result.toString());
                     }
                     else if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("-")){
+                        EditText editText1 = (EditText) findViewById(R.id.whole_cal);
+                        if (editText1.getText().toString().equals("0")) {
+                            editText1.setText(prefs.getLong(NUM1,0) + "-" + Long.parseLong(editText.getText().toString()));
+                        }
+                        else{
+                            editText1.setText("(" + editText1.getText().append(")-" + Long.parseLong(editText.getText().toString())));
+                        }
                         Long result = prefs.getLong(NUM1,0) - Long.parseLong(editText.getText().toString());
                         Log.d(LOGTAG,"Result: "+result);
                         editor.putLong(NUM1, result);
@@ -322,6 +345,13 @@ public class MainActivity extends ActionBarActivity {
                         editText.setText(result.toString());
                     }
                     else if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("*")){
+                        EditText editText1 = (EditText) findViewById(R.id.whole_cal);
+                        if (editText1.getText().toString().equals("0")) {
+                            editText1.setText(prefs.getLong(NUM1,0) + "*" + Long.parseLong(editText.getText().toString()));
+                        }
+                        else{
+                            editText1.setText("(" + editText1.getText().append(")*" + Long.parseLong(editText.getText().toString())));
+                        }
                         Long result = prefs.getLong(NUM1,0) * Long.parseLong(editText.getText().toString());
                         Log.d(LOGTAG,"Result: "+result);
                         editor.putLong(NUM1, result);
@@ -331,6 +361,13 @@ public class MainActivity extends ActionBarActivity {
                     }
                     else if(prefs.getLong(NUM1,0)!=0 && prefs.getString(OPERATOR,"").equals("/")){
                         if(Long.parseLong(editText.getText().toString()) != 0){
+                            EditText editText1 = (EditText) findViewById(R.id.whole_cal);
+                            if (editText1.getText().toString().equals("0")) {
+                                editText1.setText(prefs.getLong(NUM1,0) + "/" + Long.parseLong(editText.getText().toString()));
+                            }
+                            else{
+                                editText1.setText("(" + editText1.getText().append(")/" + Long.parseLong(editText.getText().toString())));
+                            }
                             Long result = prefs.getLong(NUM1,0) / Long.parseLong(editText.getText().toString());
                             Log.d(LOGTAG,"Result: "+result);
                             editor.putLong(NUM1, result);
@@ -339,7 +376,9 @@ public class MainActivity extends ActionBarActivity {
                             editText.setText(result.toString());
                         }
                         else{
-                            Toast.makeText(MainActivity.this,"Second number cannot be 0 in Division",Toast.LENGTH_LONG).show();
+                            Toast toast = Toast.makeText(MainActivity.this,"Second number cannot be 0 in Division",Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 360);
+                            toast.show();
                         }
                     }
                 }

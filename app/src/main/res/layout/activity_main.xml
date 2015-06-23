@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_weight="2">
             <EditText
                 android:layout_width="match_parent"
@@ -24,6 +24,17 @@
                 android:hint="0"
                 android:id="@+id/textbox"
                 android:layout_weight="3"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="16dp"
+                android:inputType="text"
+                android:hint="0"
+                android:text="0"
+                android:id="@+id/whole_cal"
+                android:layout_weight="3"
+                android:enabled="false"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -121,11 +132,11 @@
             android:orientation="horizontal"
             android:layout_weight="1">
             <Button
-                android:id="@+id/sign_dot"
+                android:id="@+id/sign_restart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="."/>
+                android:text="C"/>
             <Button
                 android:id="@+id/num_zero"
                 android:layout_width="match_parent"
@@ -133,11 +144,11 @@
                 android:layout_weight="1"
                 android:text="0"/>
             <Button
-                android:id="@+id/sign_equal"
+                android:id="@+id/sign_del"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="="/>
+                android:text="\u232b"/>
             <Button
                 android:id="@+id/sign_div"
                 android:layout_width="match_parent"
@@ -151,17 +162,11 @@
             android:orientation="horizontal"
             android:layout_weight="1">
             <Button
-                android:id="@+id/sign_restart"
+                android:id="@+id/sign_equal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="C"/>
-            <Button
-                android:id="@+id/sign_del"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="\u232b"/>
+                android:text="="/>
         </LinearLayout>
     </LinearLayout>
 
